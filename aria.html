@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>K-On! Album - Aria Player</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(blue,green);
+      color: #333;
+      
+      background-image: url('hukago.jpg');
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+    }h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: blue;
+}
+
+.album-cover {
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  object-fit: cover;
+}
+
+.track-list {
+  width: 100%;
+  max-width: 400px;
+}
+
+.track {
+  background: blueviolet;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin: 8px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.track button {
+  background: cyan;
+  border: none;
+  color: red;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+audio {
+  width: 100%;
+  margin-top: 30px;
+}
+
+  </style>
+</head>
+<body>
+  <h1>K-On! Aria Album</h1>
+  <img class="album-cover" src="htt.gif" alt="K-On Album Cover">
+  <div class="track-list" id="trackList"></div>
+  <audio id="audioPlayer" controls autoplay></audio>  <script>
+    const songs = [
+      "aria/song1.mp3",
+      "aria/song2.mp3",
+      "aria/song3.mp3",
+      "aria/song4.mp3",
+      "aria/song5.mp3",
+      "aria/song6.mp3",
+      "aria/song7.mp3",
+      "aria/song8.mp3",
+      "aria/song9.mp3",
+      "aria/song10.mp3",
+      "aria/song11.mp3",
+      "aria/song12.mp3",
+      "aria/song13.mp3",
+      "aria/song14.mp3",
+      "aria/song15.mp3",
+      "aria/song16.mp3",
+      "aria/song17.mp3",
+      "aria/song18.mp3",
+      "aria/song19.mp3",
+      "aria/song20.mp3"
+    ];
+
+    const trackList = document.getElementById("trackList");
+    const audioPlayer = document.getElementById("audioPlayer");
+    let currentTrack = 0;
+
+    songs.forEach((song, index) => {
+      const track = document.createElement("div");
+      track.classList.add("track");
+      track.innerHTML = `
+        <span>Lagu ${index + 1}</span>
+        <button onclick="playSong(${index})">Putar</button>
+      `;
+      trackList.appendChild(track);
+    });
+
+    function playSong(index) {
+      currentTrack = index;
+      audioPlayer.src = songs[currentTrack];
+      audioPlayer.play();
+    }
+
+    audioPlayer.addEventListener("ended", () => {
+      currentTrack = (currentTrack + 1) % songs.length;
+      playSong(currentTrack);
+    });
+
+    // Autoplay lagu pertama saat halaman dibuka
+    playSong(currentTrack);
+  </script></body>
+</html>
